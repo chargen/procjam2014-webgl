@@ -640,6 +640,7 @@ float blackSea(float v, float seaLevel) {
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
     vec2 p = fragCoord * iScale + iMove;
+    p = p - fract(p / iScale) * iScale;
 
     vec2 propensityDistortion = propensityDistortionMap(p, iDistortion);
 
@@ -649,7 +650,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     height = blackSea(height, iSeaLevel);
 
-	fragColor = vec4(height, height, height,1.0);
+    fragColor = vec4(height, height, height,1.0);
 }
 
 void main() {
